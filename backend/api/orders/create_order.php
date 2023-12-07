@@ -1,6 +1,9 @@
 <?php
 include('../../connection.php');
 
+
+
+
 $customer_id = $_POST['customer_id'];
 $product_id = $_POST['product_id'];
 $order_date = date("Y-m-d H:i:s");
