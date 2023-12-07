@@ -1,6 +1,6 @@
 <?php 
  include('../../connection.php');
-$username = $_POST['user_name'];
+$username = $_POST['username'];
 $password = $_POST['password'];
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
