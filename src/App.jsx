@@ -1,9 +1,10 @@
 import "./App.css";
+import LogIn from "./components/login";
 
 function App() {
   return (
     <>
-      <div>Hello from Vitte app</div>
+      <LogIn />
     </>
   );
 }

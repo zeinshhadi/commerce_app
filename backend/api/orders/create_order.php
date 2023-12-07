@@ -5,8 +5,8 @@ include('../../connection.php');
 
 
 $customer_id = $_POST['customer_id'];
-$product_id = $_POST['product_id'];
 $order_date = date("Y-m-d H:i:s");
+$product_id = $_POST['product_id'];
 $quantity = $_POST['quantity'];
 
 $insert_query = $mysqli->prepare("INSERT INTO orders (customer_id, order_date) VALUES (?, ?)");

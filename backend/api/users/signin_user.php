@@ -1,11 +1,14 @@
 <?php
 
+
 include("../../connection.php");
 require __DIR__.'../../../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$json_data = file_get_contents("php://input");
+$data = json_decode($json_data, true);
+$username = $data['username'];
+$password = $data['password'];
 
 $query=$mysqli->prepare('select user_id,user_name,password,role_id from users where user_name=?');
 $query->bind_param('s',$username);
@@ -29,7 +32,7 @@ if($num_rows== 0){
         $payload_array['user_id']=$id;
         $payload_array['user_name']=$name;
         $payload=$payload_array;
-        $response['status']= 'logged in';
+        $response['status']= 'success';
         $jwt=JWT::encode($payload,$key,'HS256');
         $response['jwt']=$jwt;
         echo json_encode($response);
