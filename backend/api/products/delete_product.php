@@ -25,12 +25,13 @@ if(!$token){
 try {
     $key = 'secret_key';
     $decoded = JWT::decode($token,new Key($key,'HS256'));
-    if($decoded->role_id==1){
+    if($decoded->role_id==1 && $decoded->user_id){
+        $seller_id =  $decoded->user_id;
 
 $product_id= $_POST['product_id'];
 
-$query = $mysqli->prepare("delete from products where product_id=?");
-$query->bind_param('i',$product_id);
+$query = $mysqli->prepare("delete from products where product_id=? and seller_id=?");
+$query->bind_param('ii',$product_id,$seller_id);
 $query->execute();
 
 if ($mysqli->affected_rows>0){

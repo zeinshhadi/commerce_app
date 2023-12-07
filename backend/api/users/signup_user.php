@@ -3,9 +3,9 @@
 $username = $_POST['username'];
 $password = $_POST['password'];
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-$query = $mysqli->prepare('insert into users (user_name, password, role_id) values(?,?,2)');
-$query->bind_param('ss',$username,$hashed_password);
+$role_id = $_POST['role_id'];
+$query = $mysqli->prepare('insert into users (user_name, password, role_id) values(?,?,?)');
+$query->bind_param('ssi',$username,$hashed_password,$role_id);
 
 $query->execute();
 

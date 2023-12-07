@@ -26,8 +26,8 @@ if(!$token){
 try {
     $key = 'secret_key';
     $decoded = JWT::decode($token,new Key($key,'HS256'));
-    if($decoded->role_id==1){
-
+    if($decoded->role_id==1 && $decoded->user_id){
+$seller_id =  $decoded->user_id;
 
 $product_id = $_POST['product_id'];
 
@@ -37,8 +37,8 @@ $price = $_POST['price'];
 $stock_quantity = $_POST['stock_quantity'];
 
 
-$query = $mysqli->prepare('UPDATE products SET name=?, description=?, price=?, stock_quantity=? WHERE product_id=?');
-$query->bind_param('ssdii', $name, $description, $price, $stock_quantity, $product_id);
+$query = $mysqli->prepare('UPDATE products SET name=?, description=?, price=?, stock_quantity=? WHERE product_id=? and seller_id=?');
+$query->bind_param('ssdiii', $name, $description, $price, $stock_quantity, $product_id,$seller_id);
 $query->execute();
 
 if ($mysqli->affected_rows > 0) {
